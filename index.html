@@ -1,0 +1,33 @@
+<script src="processing.js"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+        var workList = ['sample', 'sample'];
+        $(function(){
+                //add to ul list
+                var obj = $('#workList');
+                for(var i=0; i<workList.length; i++){
+                        var workName = workList[i];
+                        obj.append('<li><a href="./works/'+workName+'/index.html">'+workName+'</a></li>');
+                }
+        });
+
+
+</script>
+
+<script type="application/processing" data-processing-target="pjs">
+void setup() {
+  size(100, 100);
+  background(100);
+  //stroke(255);
+  //ellipse(50, 50, 25, 25);
+  //println('hello web!');
+}
+</script>
+
+<h1>Processing.js works</h1>
+<canvas id="pjs"> </canvas>
+
+<h3>work list</h3>
+<ul id="workList">
+</ul>
