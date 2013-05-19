@@ -1,0 +1,56 @@
+<script src="../../processing.js"></script>
+<script type="application/processing" data-processing-target="pjs">
+import processing.opengl.*;
+
+float xstart, xnoise, ystart, ynoise;
+color skyblue = color(100,150,255);
+
+void setup() {
+  size(500, 300, OPENGL);
+  
+  background(skyblue);
+  sphereDetail(8);
+  noStroke();
+  frameRate(30);
+  
+  xstart = random(10);
+  ystart = random(10);
+}
+
+void draw () {
+  background(skyblue);	
+
+  float cloudSpeed = 0.1;
+  xstart += cloudSpeed;  	
+  ystart += cloudSpeed;
+  
+  xnoise = xstart;
+  ynoise = ystart;
+  
+  float noiseAdd = 0.1;
+  int interval = 10;
+  for (int y = 0; y <= height; y+=interval) {
+    ynoise += noiseAdd;
+    xnoise = xstart;
+    for (int x = 0; x <= width; x+=interval) {
+      xnoise += noiseAdd;
+      drawPoint(x, y, noise(xnoise, ynoise));
+    }
+  }
+}
+
+void drawPoint(float x, float y, float noiseFactor) {
+  pushMatrix();
+    translate(x, 250 - y, -y);
+    float sphereSize = noiseFactor * 35;
+    float grey = 150 + (noiseFactor * 120);
+    float alph = 150 + (noiseFactor * 120);
+    fill(grey, alph);
+    sphere(sphereSize);
+  popMatrix();
+}
+
+</script>
+
+<h1>Processing.js works</h1>
+<canvas id="pjs"> </canvas>
